@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+rm -rf ./build
+python setup.py build_ext
+libdir=$(find "${PWD}"/build -type d -name 'lib*' -print -quit)
+export PYTHONPATH="${libdir}:${PYTHONPATH:-}"
+python test_hello.py
