@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+pyexe=python3
+type -a ${pyexe} || pyexe=python
+
+rm -rf ./build
+${pyexe} setup.py build_ext
+libdir=$(find "${PWD}"/build -type d -name 'lib*' -print -quit)
+export PYTHONPATH="${libdir}:${PYTHONPATH:-}"
+${pyexe} test_hello.py
